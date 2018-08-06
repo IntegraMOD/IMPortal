@@ -139,15 +139,15 @@ $sql = array (
 @set_time_limit(0);
 if(!@file_exists('config.php')) die('config.php not found. make sure you have uploaded file to your forum directory.');
 include('config.php');
-$db = mysql_connect($dbhost, $dbuser, $dbpasswd);
-if(!$db) die('Cannot connect: ' . mysql_error());
-$res = mysql_select_db($dbname);
-if(!$res) die('Cannot select database "' . $dbname . '": ' . mysql_error());
+$connection = mysqli_connect($dbhost, $dbuser, $dbpasswd) or die("Cannot connect");
+/*if(!$connection) die('Cannot connect: ' . mysqli_connect_error($connection));*/
+$res = mysqli_select_db($connection, $dbname) or die("cannot select DB");
+/*if(!$res) die('Cannot select database "' . $dbname . '": ' . @mysqli_error());*/
 for($i=0; $i<count($sql); $i++)
 {
  if($table_prefix !== 'phpbb_') $sql[$i] = preg_replace('/phpbb_/', $table_prefix, $sql[$i]);
- $res = mysql_query($sql[$i]);
- if(!$res) { echo 'error in query ', ($i + 1), ': ', mysql_error(), '<br />'; }
+ $res = mysqli_query($connection, $sql[$i]);
+ if(!$res) { echo 'error in query ', ($i + 1), ': ', mysqli_error(), '<br />'; }
 }
 echo 'done (', count($sql), ' queries).';
 
