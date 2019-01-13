@@ -36,9 +36,9 @@ $phpbb_root_path = "./../";
 require($phpbb_root_path . 'extension.inc');
 require('./pagestart.' . $phpEx);
 
-if( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
+if( isset($_GET['mode']) || isset($_POST['mode']) )
 {
-	$mode = ($HTTP_GET_VARS['mode']) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
+	$mode = ($_GET['mode']) ? $_GET['mode'] : $_POST['mode'];
 	$mode = htmlspecialchars($mode);
 }
 else 
@@ -46,11 +46,11 @@ else
 	//
 	// These could be entered via a form button
 	//
-	if( isset($HTTP_POST_VARS['add']) )
+	if( isset($_POST['add']) )
 	{
 		$mode = "add";
 	}
-	else if( isset($HTTP_POST_VARS['save']) )
+	else if( isset($_POST['save']) )
 	{
 		$mode = "save";
 	}
@@ -60,7 +60,7 @@ else
 	}
 }
 
-if(isset($HTTP_POST_VARS['cancel']))
+if(isset($_POST['cancel']))
 {
 	$mode="";
 }
@@ -69,7 +69,7 @@ if( $mode != "" )
 {
 	if( $mode == "edit" || $mode == "add" )
 	{
-		$bv_id = ( isset($HTTP_GET_VARS['id']) ) ? intval($HTTP_GET_VARS['id']) : 0;
+		$bv_id = ( isset($_GET['id']) ) ? intval($_GET['id']) : 0;
 
 		$template->set_filenames(array(
 			"body" => "admin/blocks_variables_edit_body.tpl")
@@ -116,8 +116,8 @@ if( $mode != "" )
 						$pos = strpos($file, ".".$phpEx);
 						if ($pos!==false)
 						{
-							$temp = ereg_replace("\.".$phpEx,"",$file);
-							$temp1 = ereg_replace('blocks_imp_','',$temp);
+							$temp = str_replace(".".$phpEx,"",$file);
+							$temp1 = str_replace('blocks_imp_','',$temp);
 							$block .= '<option value="' . $temp1 .'" ';
 							if($bv_info['block']==$temp1)
 							{
@@ -153,8 +153,8 @@ if( $mode != "" )
 					$pos = strpos($file, ".".$phpEx);
 					if ($pos!==false)
 					{
-						$temp = ereg_replace("\.".$phpEx,"",$file);
-						$temp1 = ereg_replace('blocks_imp_','',$temp);
+						$temp = str_replace("\.".$phpEx,"",$file);
+						$temp1 = str_replace('blocks_imp_','',$temp);
 						$block .= '<option value="' . $temp1 .'">' . $temp1;
 					}
 				}
@@ -193,14 +193,14 @@ if( $mode != "" )
 	}
 	else if( $mode == "save" )
 	{
-		$bv_id = ( isset($HTTP_POST_VARS['id']) ) ? intval($HTTP_POST_VARS['id']) : 0;
-		$bv_label = ( isset($HTTP_POST_VARS['label']) ) ? trim($HTTP_POST_VARS['label']) : "";
-		$bv_sub_label = ( isset($HTTP_POST_VARS['sub_label']) ) ? trim($HTTP_POST_VARS['sub_label']) : "";
-		$bv_name = ( isset($HTTP_POST_VARS['config_name']) ) ? trim($HTTP_POST_VARS['config_name']) : "";
-		$bv_options = ( isset($HTTP_POST_VARS['options']) ) ? trim($HTTP_POST_VARS['options']) : "";
-		$bv_values = ( isset($HTTP_POST_VARS['values']) ) ? trim($HTTP_POST_VARS['values']) : "";
-		$bv_block = ( isset($HTTP_POST_VARS['block']) ) ? trim($HTTP_POST_VARS['block']) : "";
-		$bv_type = ( isset($HTTP_POST_VARS['type']) ) ? intval($HTTP_POST_VARS['type']) : 0;
+		$bv_id = ( isset($_POST['id']) ) ? intval($_POST['id']) : 0;
+		$bv_label = ( isset($_POST['label']) ) ? trim($_POST['label']) : "";
+		$bv_sub_label = ( isset($_POST['sub_label']) ) ? trim($_POST['sub_label']) : "";
+		$bv_name = ( isset($_POST['config_name']) ) ? trim($_POST['config_name']) : "";
+		$bv_options = ( isset($_POST['options']) ) ? trim($_POST['options']) : "";
+		$bv_values = ( isset($_POST['values']) ) ? trim($_POST['values']) : "";
+		$bv_block = ( isset($_POST['block']) ) ? trim($_POST['block']) : "";
+		$bv_type = ( isset($_POST['type']) ) ? intval($_POST['type']) : 0;
 
 		if($bv_name == "" || $bv_label == "" )
 		{
@@ -252,16 +252,16 @@ if( $mode != "" )
 	}
 	else if( $mode == "delete" )
 	{
-		if( isset($HTTP_POST_VARS['id']) ||  isset($HTTP_GET_VARS['id']) )
+		if( isset($_POST['id']) ||  isset($_GET['id']) )
 		{
-			$bv_id = ( isset($HTTP_POST_VARS['id']) ) ? intval($HTTP_POST_VARS['id']) : intval($HTTP_GET_VARS['id']);
+			$bv_id = ( isset($_POST['id']) ) ? intval($_POST['id']) : intval($_GET['id']);
 		}
 		else
 		{
 			$bv_id = 0;
 		}
 		
-		if(!isset($HTTP_POST_VARS['confirm']))
+		if(!isset($_POST['confirm']))
 		{
 			$hidden_fields = '<input type="hidden" name="mode" value="'.$mode.'" /><input type="hidden" name="id" value="'.$bv_id.'" />';
 			
