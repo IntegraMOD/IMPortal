@@ -560,7 +560,7 @@ admin/index.php
 		"L_HOME_INDEX" => $lang['Home_index'],
 		"U_HOME_INDEX" => append_sid("../portal.$phpEx"),
 		"L_PREVIEW_HOME" => $lang['Home_preview'],
-		"U_PREVIEW_HOME" => append_sid("portal.$phpEx?pane=right"),
+		"U_PREVIEW_HOME" => append_sid("../portal.$phpEx"),
 #
 #-----[ OPEN ]------------------------------------------
 #
