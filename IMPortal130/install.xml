@@ -237,7 +237,7 @@
 				<action type="before-add"><![CDATA[		"L_HOME_INDEX" => $lang['Home_index'],
 		"U_HOME_INDEX" => append_sid("../portal.$phpEx"),
 		"L_PREVIEW_HOME" => $lang['Home_preview'],
-		"U_PREVIEW_HOME" => append_sid("portal.$phpEx?pane=right"),
+		"U_PREVIEW_HOME" => append_sid("../portal.$phpEx"),
 ]]></action>
 			</edit>
 		</open>
@@ -507,6 +507,6 @@ $images['spacer'] = "$current_template_images/spacer.gif";
 ]]></action>
 			</edit>
 		</open>
-		<php-installer><![CDATA[portalinstall.php]]></php-installer>
+		<php-installer><![CDATA[sql_install.php]]></php-installer>
 	</action-group>
 </mod>
