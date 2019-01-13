@@ -58,7 +58,7 @@ if(GetCookie(tmp) == '2')
     <!-- END center_blocks_row -->
     </td>
 
-<td id="right_block" style="display: ''; width:150px">
+<td id="right_block" valign="top" style="display: ''; width:150px">
 <table cellpadding="0" cellspacing="0" border="0">
 <tr>
 
