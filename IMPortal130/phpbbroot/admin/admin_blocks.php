@@ -303,9 +303,9 @@ if( $mode != "" && $mode != "blocks" )
 						$pos = strpos($file, ".".$phpEx);
 						if ($pos!==false)
 						{
-							$temp = ereg_replace("\.".$phpEx,"",$file);
-							$temp1 = ereg_replace('blocks_imp_','',$temp);
-							$temp1 = ereg_replace('_',' ',$temp1);
+							$temp = str_replace(".".$phpEx,"",$file);
+							$temp1 = str_replace('blocks_imp_','',$temp);
+							$temp1 = str_replace('_',' ',$temp1);
 							$blockfile .= '<option value="' . $temp .'" ';
 							if($b_info['blockfile']==$temp)
 							{
